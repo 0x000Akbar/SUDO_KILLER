@@ -9,6 +9,7 @@ However, these rules only affect the current user, so if user impersonation is p
 
 BeRoot collects all these rules from all possible user an realize exaclty the same tests 
 as listed perviously (e.g sudoers file method).
+https://github.com/AlessandroZ/BeRoot
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

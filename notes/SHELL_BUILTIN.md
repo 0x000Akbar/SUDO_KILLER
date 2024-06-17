@@ -1,18 +1,18 @@
+# Shell builtins
 Shell builtin commands are commands that are built into the shell itself rather than being external programs or scripts. 
 
 These commands are directly available to the shell and do not require separate executable files to be present on the system. 
 
 Builtin commands are typically used for basic operations and functionalities that are essential for the shell's operation.
 
-
 Unless otherwise noted, each builtin command documented in this section as accepting options preceded by -accepts to signify 
 the end of the options. 
 
 The :, true, false, and test/[ builtins do not accept options and do not treat specially. 
 
-The exit, logout, return, break, continue, let, and shift builtins accept and process arguments beginning with - without requiring. 
+The exit, logout, return, break, continue, let, and shift builtins accept and process arguments beginning with "-" without requiring it. 
 
-Other builtins that accept arguments but are not specified as accepting options interpret arguments beginning with - as invalid options and require to prevent this inter-pretation.
+Other builtins that accept arguments, but are not specified as accepting options, interpret arguments beginning with '-' as invalid options and require to prevent this interpretation.
 
 : [arguments]
 

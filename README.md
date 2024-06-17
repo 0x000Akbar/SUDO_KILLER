@@ -17,25 +17,17 @@
  :bulb: Best Viewed in Dark Mode :)
 
 
-- [ Intro ](#intro)
-- [ Usage ](#usage)
-- [ Docker ](#docker)
-- [ Checks ](#check)
-- [ Scenarios ](#scenarios)
-- [ Video (demo) ](#videos)
-- [ CVEs ](#CVEs)
-- [ SK-Tools ](#sk-tools)
-- [ Stargazers ](#stars)
-- [ Contribution ](#contribute)
-- [ Support ](#support)
-- [ Credits ](#credits)
-- [ Disclaimers ](#disclaimer)
-- [ License ](#license)
+- [Contributing](#contributing)
+  - [Stargazers over time](#stargazers-over-time)
+  - [Support](#support)
+  - [Credits](#credits)
+  - [Disclaimer](#disclaimer)
+  - [License](#license)
 
 <a name="intro"></a>
 ## Introduction
 
-`SUDO_KILLER` is a tool geared towards cyber security practitioners (pentesters, security auditors, system admins, CTF players and Infosec students ), facilitating privilege escalation within Linux environments. It focuses on vulnerabilities tied to SUDO usage, including misconfigurations in sudo rules, version-based weaknesses (CVEs and vulnerabilities), and risky binary deployments (GTFOBINS). These weak points can be exploited to gain ROOT-level privileges or impersonate users.
+`SUDO_KILLER` is a tool geared towards cyber security practitioners (pentesters, security auditors, system admins, CTF players and Infosec students), facilitating privilege escalation within Linux environments. It focuses on vulnerabilities tied to SUDO usage, including misconfigurations in sudo rules, version-based weaknesses (CVEs and other vulnerabilities), and risky binary deployments (GTFOBINS). These weak points can be exploited to gain ROOT-level privileges or impersonate other users.
 
 `SUDO_KILLER` provides a catalog of potential commands and local exploits for manual privilege elevation. Importantly, it refrains from automated exploitation, requiring users to carry out the exploitation process themselves as per its intended usage.
 
@@ -52,6 +44,7 @@ Below is a list of checks that are perform by `SUDO_KILLER`
 - Writable directories where scripts reside
 - Binaries that might be replaced
 - Identify missing scripts
+- ...
 
 > [!WARNING]
 > The check list above is NOT exhaustive.
@@ -59,7 +52,7 @@ Below is a list of checks that are perform by `SUDO_KILLER`
 <a name="usage"></a>
 ## Usage 
 
-To get started with SUDO_KILLER, you can either git clone or download the zip. If you want to practice and/or test it, there is a vulnerable testing enviroment (docker) see the video on it which provides an overview on how to setup the docker and run SUDO_KILLER. Several scenarios can be setup in the docker environment and can be used for testing different misconfigurations or flaws. Alternatively, you can run it on the system to be audited to check for misconfigurations and/or flaws related to sudo.
+To get started with SUDO_KILLER, you can either git clone or download the zip. If you want to practice and/or test it, there is a vulnerable testing enviroment (using docker). See the related video which provides an overview on how to setup the docker and run SUDO_KILLER. Several scenarios can be setup in the docker environment and can be used for testing different misconfigurations or flaws. Alternatively, you can run it on the system to be audited to check for misconfigurations and/or flaws related to sudo.
 
 ```shell
 ./SUDO_KILLERv<version>.sh -c -a -e -r report.txt -p /tmp
@@ -80,10 +73,10 @@ Optional arguments:
 > Very often, a sudo version might be vulnerable but some pre-requisites might be needed for a successful exploitation.
 
 > [!NOTE]
-> Providing password: If you need to input a password to run sudo -l then the script will not work if you don't provide a password with the argument -s.
+> Providing password: If a password is needed to run sudo -l then the script will not work if you don't provide a password with the argument -s.
 
 <a name="docker"></a>
-## Docker (Vulnerable testing environment)
+### Docker (Vulnerable testing environment)
 
 <p align="left">
     <img width="25%" src="https://github.com/TH3xACE/res/blob/main/SK/docker.gif" alt="-dockerlogo"/>
@@ -107,7 +100,7 @@ docker run --user 1000 --rm -it th3xace/sudo_killer_demo2
 
 By default, if the NOPASSWD tag is applied to any of the entries for a user on a host, you will be able to run "sudo -l" without a password. This behavior may be overridden via the verifypw and listpw options.
 
-However, these rules only affect the current user, so if user impersonation is possible (using su) sudo -l should be launched from this user as well.
+However, these rules only affect the current user, so if user impersonation is possible (using su), sudo -l should be launched from this user as well.
 
 Sometimes the file /etc/sudoers can be read even if sudo -l is not accessible without password.
 
@@ -141,6 +134,7 @@ Scenario 12: [16] Backdooring sudo (Credentials Capture)
 <a name="videos"></a>
 ## Videos - Demo 
 
+### Setup and exploitation
 The playlist can be found here: [https://www.youtube.com/watch?v=Q8iO9mYrfv8&list=PLQPKPAuCA40FMpMKWZLxQydLe7rPL5bml](https://www.youtube.com/watch?v=VjXiLhmOmHs&list=PLQPKPAuCA40ERFDNZ-Ub58SgGHGKAcr26)
 
 > [!IMPORTANT]
@@ -357,7 +351,7 @@ Version 3 of `SUDO_KILLER` now includes a list of tools that can be used to achi
 
 </br>
 
-## Capturing Credentials via sudo redirect (SK-credHarvest2.sh)
+### Capturing Credentials via sudo redirect (SK-credHarvest2.sh)
 The script SK-credHarvest2.sh from SK-Tools allow to perform a credential capture by creating a fake sudo via alias then re-direct to real sudo. Actually works only for bash (not working/implemented for ZSH or else for now)configured linux.
 
 The displayed message when asking for credential when using sudo differs from the version being used. It is possible to choose between two options (differ based on OS version).
@@ -382,7 +376,7 @@ For the currrent user (cuser):
 output: the log /tmp/sk-crds.log will contains the credentials
 
 
-## Alias' Audit (SK-alias-report.sh)
+### Alias' Audit (SK-alias-report.sh)
 You will either need root privilege, access to a backup of sudoers or read access to /etc/sudoers.
 
 ```shell
@@ -390,7 +384,7 @@ Usage: ./SK-alias-sudoers.sh -p <sudoers_path> -k <keyword> [-u] [-r] [-m] [-c] 
   where -u: user | -r: runas | -m: host | -c: command | -a: all
 ```
 
-## Bruteforce/Password Spray via su (SK-su-BruteForce.sh) 
+### Bruteforce/Password Spray via su (SK-su-BruteForce.sh) 
 Using su to bruteforce password and password spray with concurrency, timeout and sleep. 
 
 ```shell
@@ -406,21 +400,21 @@ Module: User:Password Bruteforce : usrpwdbf
 Example: ./SK-su-BruteForce.sh -m usrpwdbf -uf users-pwd.txt  -c 5 -s 0.005 -t 0.9 
 ```
 
-## Search for backup of the file sudoers (SK-search-sudoers.sh)
+### Search for backup of the file sudoers (SK-search-sudoers.sh)
 Find possible sudoers backup files in /mnt/ /opt/ /etc/ /etc/ /home/ /app*/  and any additional one parse as argument
 
 ```shell
 Usage: ./SK-search-sudoers.sh /tmp/
 ```
 
-## Update dangerous bins - GTFOBINS (SK_dbins_update.sh) 
+### Update dangerous bins - GTFOBINS (SK_dbins_update.sh) 
 To update the dangerous bins, go to dbins/update and run ./SK_dbins_update.sh. Make sure you have internet connection.
 
 ```shell
 Usage: ./SK_dbins_update.sh
 ```
 
-## Binary Relative Path (SK-relative-path.sh)
+### Binary Relative Path (SK-relative-path.sh)
 Looking for binaries with relative path that be abused! if there is no secure_path set.
 
 ```shell
@@ -434,7 +428,7 @@ Usage: ./SK-relative-path.sh /opt/support/purge.sh
 
 
 <a name="contribute"></a>
-## Contributing
+# Contributing
 
 `SUDO_KILLER` is an open-source project and highly appreciate any contributions. Whether you are helping us fix bugs, proposing new features, improving our documentation or spreading the word - we would love to have you as a contributor. Please reach me on twitter or Linkedin if you have any suggestions, feedback or want to contribute, you can also create a Pull Request. I am looking for contribution on the sudo CVEs related to 3rd party (I have a list of about 175) and any help would be appreciated.
 
@@ -461,12 +455,12 @@ Thank you all for your support!
 <a name="credits"></a>
 ## Credits
 
-I crafted the script independently, leveraging online resources from GitHub and other sources in the wild. Acknowledgments are also due to the creators of exploits associated with CVEs. You can trace their details and references in the exploit itself, as well as in the accompanying notes when the tool is executed. Notable recognition extends to Vincent Puydoyeux, whose inspiration spurred the development of this tool, and Koutto, for invaluable assistance in handling Docker intricacies and enhancing the tool's functionality. Additionally, a heartfelt thank you goes out to Emilio Pinna (norbemi) and Andrea Cardaci (cyrus_and) for their invaluable contributions to GTFO Bins, which significantly influenced this project's development.
+I crafted the script independently, leveraging online resources from GitHub and other sources in the wild. Acknowledgments are also due to the creators/publishers of exploits associated with the CVEs. You can trace back their details and references in the exploit itself, as well as in the accompanying notes when the tool is executed. Notable recognition extends to Vincent Puydoyeux, whose inspiration spurred the development of this tool, and Koutto, for invaluable assistance in handling Docker intricacies and enhancing the tool's functionality. Additionally, a heartfelt thank you goes out to Emilio Pinna (norbemi) and Andrea Cardaci (cyrus_and) for their invaluable contributions to GTFO Bins, which significantly influenced this project's development.
 
 <a name="disclaimer"></a>
 ## Disclaimer
 
-This script is for Educational purpose ONLY. Do not use it without permission of the owner of the system you are running it. The usual disclaimer applies, especially the fact that me (TH3xACE) is not liable for any damages caused by direct or indirect use of the information or functionality provided by this project. The author (TH3xACE) or any Internet provider bears NO responsibility for content or misuse of these programs or any derivatives thereof. By using these programs you accept the fact that any damage (dataloss, system crash, system compromise, etc.) caused by the use of the script is not the author responsibility.
+This script is for educational purpose ONLY. Do not use it without permission of the owner of the system you are running it in. The usual disclaimer applies, especially the fact that me (TH3xACE) is not liable for any damages caused by direct or indirect use of the information or functionality provided by this project. The author (TH3xACE) or any Internet provider bears NO responsibility for content or misuse of these programs or any derivatives thereof. By using these programs you accept the fact that any damage (dataloss, system crash, system compromise, etc.) caused by the use of the script is not the author responsibility.
 
 <a name="license"></a>
 ## License
