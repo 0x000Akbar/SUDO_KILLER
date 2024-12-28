@@ -146,7 +146,7 @@ The playlist can be found here: [https://www.youtube.com/watch?v=Q8iO9mYrfv8&lis
 </summary> <br />
     
 <p align="center">
-   <a href="#">  
+   <a href="https://youtu.be/Q8iO9mYrfv8">  
       <img width="39%" src="https://github.com/TH3xACE/res/blob/main/SK3/Slide1.JPG" alt="apis"/>
    </a>
 &nbsp;
